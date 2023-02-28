@@ -1,0 +1,13 @@
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=NO 
+
+network={
+ssid="Rizqi"
+psk="pleasework"
+}
+
+network={
+ssid="scream daddy for free wifi"
+psk="LNNQKLKPH3"
+}
