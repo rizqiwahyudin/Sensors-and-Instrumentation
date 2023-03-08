@@ -4,7 +4,7 @@ from scipy import signal as signal
 import numpy as np
 
 # Read the CSV file
-df = pd.read_csv('fingerproper.csv', sep=' ', header=None, names=['R', 'G', 'B'])
+df = pd.read_csv('finger_test_5.csv', sep=' ', header=None, names=['R', 'G', 'B'])
 
 red = df["R"].to_numpy()
 green = df["G"].to_numpy()
@@ -33,14 +33,14 @@ def band_pass_filter(data, lowcut, highcut, fs, order=5):
     filtered_signal = signal.filtfilt(b, a, data)
     return filtered_signal
 
-red = band_pass_filter(red, 30, 100, 250)
-green = band_pass_filter(green, 30, 100, 250)
-blue = band_pass_filter(blue, 30, 100, 250)
+red = band_pass_filter(red, 30, 100, 5000)
+green = band_pass_filter(green, 30, 100, 3000)
+blue = band_pass_filter(blue, 30, 100, 5000)
 
 
 fft_red = np.fft.fft(red) 
-fft_red = np.fft.fft(green) 
-fft_red = np.fft.fft(blue) 
+fft_green = np.fft.fft(green) 
+fft_blue = np.fft.fft(blue) 
 t = range(2706)
 
 freq_red = np.fft.fftfreq(len(red), t[1]-t[0])
@@ -73,8 +73,8 @@ axs[2].set_ylabel('Intensity')
 fig.suptitle('RGB Absorption')
 
 plt.figure(fig_fft.number)
-plt.plot(freq_red, np.abs(fft_red),color='red')
-plt.title('FFT of Red Wavelengths')
+plt.plot(freq_green, np.abs(fft_green),color='green')
+plt.title('FFT of Green Wavelengths')
 
 
 
